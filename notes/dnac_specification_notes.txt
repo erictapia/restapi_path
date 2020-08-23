@@ -1,0 +1,41 @@
+Level 1 Keys
+    info - information about API such as license, terms, version, title
+    swagger - swagger version aka OpenAPI
+    tags - used to group API path, it includes name and description
+    schemes - empty list
+    paths - 
+    definitions - all model schemas used in an API path request or response body
+
+
+Key specific strutucture
+
+    [paths]:
+        [URI path]:
+            [HTTP verb]:
+                [operationID]
+                [tags] - used to link to the level1 key named tags
+                [summary] - description of the request call
+                [description]
+                [consumes] - allowed Content-Type header options
+                [produces] - allowed Accept header options
+                [parameters]: - a list information about requests such as headers, parameters, body, etc.
+                    [name]
+                    [description]
+                    [required]
+                    [schema]:
+                        [$ref] - a reference to the data model schema
+                    [in] - where in the response is this parameter used
+                [responses]
+                    [status code]:
+                        [description]
+                        [schema]:
+                            [$ref] - a reference to the data model schema
+
+
+    [definitions]:
+        [type]
+        [properties]
+            [key]:
+                [type] - data type string, object, boolean, number, etc.
+                    [items]:
+                        [properties]                    
