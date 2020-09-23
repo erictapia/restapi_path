@@ -1,0 +1,3854 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Cisco SD-WAN vManage API - vManage Management Part",
+    "description": "The vManage API exposes the functionality of operations maintaining devices and the overlay network",
+    "contact": {
+      "email": "vmanage-api@cisco.com"
+    },
+    "license": {
+      "name": "Commercial License",
+      "url": "https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html"
+    },
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "/dataservice"
+    }
+  ],
+  "paths": {
+    "/device/action/software": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Get software images",
+        "operationId": "findSoftwareImages",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "Software image URL": {
+                    "description": "Software image URL",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Create software image URL",
+        "operationId": "createImageURL",
+        "requestBody": {
+          "description": "Create software image request payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Create software image request": {
+                  "description": "Create software image request",
+                  "value": {
+                    "versionName": "16.1.2",
+                    "versionURL": "ftp://1.1.1.1/builds/16.1/"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/imageProperties/{versionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Get Image Properties",
+        "operationId": "getImageProperties",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "Version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Image properties": {
+                    "description": "Image properties",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/images": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Get software images",
+        "operationId": "findSoftwareImagesWithFilters",
+        "parameters": [
+          {
+            "name": "imageType",
+            "in": "query",
+            "description": "Image type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "vnfType",
+            "in": "query",
+            "description": "VNF type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "Software image URL": {
+                    "description": "Software image URL",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/package": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Software Update"
+        ],
+        "description": "Install software package",
+        "operationId": "installPkg",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/package/custom/file/{uuid}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Software Package"
+        ],
+        "description": "Get bootstrap file contents",
+        "operationId": "getFileContents",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "File uuid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "File content": {
+                    "description": "File content",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Troubleshooting Tools - Device Software Package"
+        ],
+        "description": "Edit bootstrap file",
+        "operationId": "editConfigFile",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "File uuid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Bootstrap file",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Bootstrap file": {
+                  "description": "Bootstrap file",
+                  "value": {}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Bootstrap file": {
+                    "description": "Bootstrap file",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/package/custom/uploads/{type}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Software Package"
+        ],
+        "description": "Upload virtual image/bootstrap file",
+        "operationId": "uploadImageFile",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "description": "Upload file type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "image",
+                "file"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "File content": {
+                    "description": "File content",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/package/custom/vnfPackage": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Software Package"
+        ],
+        "description": "Create VNF custom package",
+        "operationId": "createVnfPackage",
+        "requestBody": {
+          "description": "Custom package",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Custom package": {
+                  "description": "Custom package",
+                  "value": {}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "File content": {
+                    "description": "File content",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/package/imageCount": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Software Update"
+        ],
+        "description": "Number of software image presented in vManage repository",
+        "operationId": "getUploadImagesCount",
+        "parameters": [
+          {
+            "name": "imageType",
+            "in": "query",
+            "description": "Image type",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "default": "software"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/package/{fileName}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Software Update"
+        ],
+        "description": "Download software package file",
+        "operationId": "downloadPackageFile",
+        "parameters": [
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "Pakcage file name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "imageType",
+            "in": "query",
+            "description": "Image type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "software"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/package/{imageType}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Software Update"
+        ],
+        "description": "Install software image package",
+        "operationId": "processSoftwareImage",
+        "parameters": [
+          {
+            "name": "imageType",
+            "in": "path",
+            "description": "Image type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/pnfproperties/{pnfType}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Get PNF Properties",
+        "operationId": "getPnfProperties",
+        "parameters": [
+          {
+            "name": "pnfType",
+            "in": "path",
+            "description": "PNF type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "PNF properties": {
+                    "description": "PNF properties",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/vedge/version": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Get vEdge software version",
+        "operationId": "findVEdgeSoftwareVersion",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "vEdge software version": {
+                    "description": "vEdge software version",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/version": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Get software version",
+        "operationId": "findSoftwareVersion",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Software version": {
+                    "description": "Software version",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/vnfproperties/{versionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Get VNF Properties",
+        "operationId": "getVnfProperties",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "Version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "VNF properties": {
+                    "description": "VNF properties",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/ztp/version": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Get ZTP software version",
+        "operationId": "findZtpSoftwareVersion",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "ZTP software version": {
+                    "description": "ZTP software version",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/software/{versionId}": {
+      "put": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Update software image URL",
+        "operationId": "updateImageURL",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "Version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update software image request payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Update software image request": {
+                  "description": "Update software image request",
+                  "value": {}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Troubleshooting Tools - Software Actions"
+        ],
+        "description": "Delete software image URL",
+        "operationId": "deleteImageURL",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "Version",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/status/cancel/{processId}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Dashboard"
+        ],
+        "description": "Bulk cancel task status",
+        "operationId": "cancelPendingTasks",
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "description": "Process Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/status/clean": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Dashboard"
+        ],
+        "description": "Delete task and status vertex",
+        "operationId": "cleanStatus",
+        "parameters": [
+          {
+            "name": "cleanStatus",
+            "in": "query",
+            "description": "Clear status flag",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/device/action/status/clear": {
+      "delete": {
+        "tags": [
+          "Troubleshooting Tools - Dashboard"
+        ],
+        "description": "Delete status of action",
+        "operationId": "deleteStatus",
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "query",
+            "description": "Process Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/status/tasks": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Dashboard"
+        ],
+        "description": "Find running tasks",
+        "operationId": "findRunningTasks",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Running tasks": {
+                    "description": "Running tasks",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/status/tasks/activeCount": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Dashboard"
+        ],
+        "description": "Get active task count",
+        "operationId": "getActiveTaskCount",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Active task count": {
+                    "description": "Active task count",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/status/tasks/clean": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Dashboard"
+        ],
+        "description": "Delete task and status vertex",
+        "operationId": "cleanStatus_1",
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "query",
+            "description": "Process Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/action/status/{actionName}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Dashboard"
+        ],
+        "description": "Find status of action",
+        "operationId": "findStatus",
+        "parameters": [
+          {
+            "name": "actionName",
+            "in": "path",
+            "description": "Action name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "push_feature_template_configuration-01232017T154359940"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Action status": {
+                    "description": "Action status",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/admintech": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Generate admin tech logs",
+        "operationId": "createAdminTech",
+        "requestBody": {
+          "description": "Admin tech generation request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Generate Admin tech log": {
+                  "description": "Generate Admin tech log",
+                  "value": {
+                    "deviceIP": "10.3.0.1",
+                    "exclude-cores": true,
+                    "exclude-tech": false,
+                    "exclude-logs": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/admintech/download/{filename}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Download admin tech logs",
+        "operationId": "downloadAdminTechFile",
+        "parameters": [
+          {
+            "name": "filename",
+            "in": "path",
+            "description": "Admin tech file",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/admintech/{requestID}": {
+      "delete": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Delete admin tech logs",
+        "operationId": "deleteAdminTechFile",
+        "parameters": [
+          {
+            "name": "requestID",
+            "in": "path",
+            "description": "Request Id of admin tech generation request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/admintechs": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Get device admin-tech information",
+        "operationId": "listAdminTechs",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Admin-tech information": {
+                    "description": "Admin-tech information",
+                    "value": {
+                      "data": [
+                        {
+                          "creationTime": 1590186370340,
+                          "size": 1081406,
+                          "fileName": "10.3.0.1-20200522-102611-admin-tech.tar.gz",
+                          "state": "done",
+                          "deviceIP": "10.3.0.1",
+                          "local-system-ip": "10.3.0.1",
+                          "requestTokenId": "10540562-6759-40ad-917f-71d4b81ff37d"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/nping/{deviceIP}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "NPing device",
+        "operationId": "npingDevice",
+        "parameters": [
+          {
+            "name": "deviceIP",
+            "in": "path",
+            "description": "Device IP",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "NPing parameter",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "NPing parameter": {
+                  "description": "NPing parameter",
+                  "value": {}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/ping/{deviceIP}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Ping device",
+        "operationId": "pingDevice",
+        "parameters": [
+          {
+            "name": "deviceIP",
+            "in": "path",
+            "description": "Device IP",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Ping parameter",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Ping parameter": {
+                  "description": "Ping parameter",
+                  "value": {}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/porthopcolor/{deviceIP}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Request port hop color",
+        "operationId": "processPortHopColor",
+        "parameters": [
+          {
+            "name": "deviceIP",
+            "in": "path",
+            "description": "Device IP",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Device port hop color",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Device port hop color": {
+                  "description": "Device port hop color",
+                  "value": {
+                    "color": "mpls"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/reset/interface/{deviceIP}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Reset device interface",
+        "operationId": "processInterfaceReset",
+        "parameters": [
+          {
+            "name": "deviceIP",
+            "in": "path",
+            "description": "Device IP",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Device interface",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Device interface": {
+                  "description": "Device interface",
+                  "value": {
+                    "vpnId": "512",
+                    "ifname": "GigabitEthernet1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/resetuser/{deviceIP}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Request reset user",
+        "operationId": "processResetUser",
+        "parameters": [
+          {
+            "name": "deviceIP",
+            "in": "path",
+            "description": "Device IP",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Device user reset",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Device user reset": {
+                  "description": "Device user reset",
+                  "value": {
+                    "user": "admin"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/servicepath/{deviceIP}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Service path",
+        "operationId": "servicePath",
+        "parameters": [
+          {
+            "name": "deviceIP",
+            "in": "path",
+            "description": "Device IP",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Service path parameter",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Service path parameter": {
+                  "description": "Service path parameter",
+                  "value": {}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/traceroute/{deviceIP}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Traceroute",
+        "operationId": "tracerouteDevice",
+        "parameters": [
+          {
+            "name": "deviceIP",
+            "in": "path",
+            "description": "Device IP",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Traceroute parameter",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Traceroute parameter": {
+                  "description": "Traceroute parameter",
+                  "value": {}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/device/tools/tunnelpath/{deviceIP}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "TunnelPath",
+        "operationId": "tunnelPath",
+        "parameters": [
+          {
+            "name": "deviceIP",
+            "in": "path",
+            "description": "Device IP",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "TunnelPath parameter",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "TunnelPath parameter": {
+                  "description": "TunnelPath parameter",
+                  "value": {}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/diagnostics/dbschema": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get the current database schema",
+        "operationId": "getDBSchema",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Schema definition": {
+                    "description": "Schema definition",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/diagnostics/threadpools": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get information on the threadpools",
+        "operationId": "getThreadPools",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Thread pool": {
+                    "description": "Thread pool",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/group": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Group"
+        ],
+        "description": "Retrieve device group list",
+        "operationId": "listDeviceGroupList",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "Device group list": {
+                    "description": "Device group list",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/group/device": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Group"
+        ],
+        "description": "Retrieve device groups",
+        "operationId": "listDeviceGroups",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "Device group": {
+                    "description": "Device group",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/group/devices": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Group"
+        ],
+        "description": "Retrieve devices in group",
+        "operationId": "listGroupDevices",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "query",
+            "description": "Group Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ssh",
+            "in": "query",
+            "description": "SSH",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "vpnId",
+            "in": "query",
+            "description": "VPN Id",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "Device list": {
+                    "description": "Device list",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/group/map/devices": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Group"
+        ],
+        "description": "Retrieve group devices for map",
+        "operationId": "listGroupDevicesForMap",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "query",
+            "description": "Group Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "vpnId",
+            "in": "query",
+            "description": "VPN Id",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "Group devices map": {
+                    "description": "Group devices map",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/group/map/devices/links": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Group"
+        ],
+        "description": "Retrieve devices in group for map",
+        "operationId": "listGroupLinksForMap",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "query",
+            "description": "Group Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "examples": {
+                  "Devices in group map": {
+                    "description": "Devices in group map",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/statistics/speedtest": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get stats raw data",
+        "operationId": "getStatDataRawData_24",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query string",
+            "schema": {
+              "type": "string"
+            },
+            "example": {
+              "query": {
+                "condition": "AND",
+                "rules": [
+                  {
+                    "value": [
+                      "2020-05-10T01:00:00 UTC",
+                      "2020-05-10T01:30:00 UTC"
+                    ],
+                    "field": "entry_time",
+                    "type": "date",
+                    "operator": "between"
+                  }
+                ]
+              },
+              "aggregation": {
+                "metrics": [
+                  {
+                    "property": "latency",
+                    "type": "avg"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Search result": {
+                    "description": "Search result",
+                    "value": {
+                      "data": [
+                        {
+                          "remote_color": "3g",
+                          "fec_re": 0,
+                          "vqoe_score": 10,
+                          "device_model": "vedge-cloud",
+                          "latency": 1,
+                          "tx_octets": 0,
+                          "dst_ip": "10.0.101.2",
+                          "local_color": "lte",
+                          "src_ip": "10.1.14.14",
+                          "sla_class_names": "None",
+                          "loss": 0,
+                          "total": 600,
+                          "tx_pkts": 0,
+                          "fec_tx": 0,
+                          "rx_octets": 0,
+                          "statcycletime": 1589075400056,
+                          "state": "Up",
+                          "local_system_ip": "172.16.255.14",
+                          "tenant": "default",
+                          "entry_time": 1589073792008,
+                          "loss_percentage": 0,
+                          "rx_pkts": 0,
+                          "vmanage_system_ip": "172.16.255.14",
+                          "fec_rx": 0,
+                          "src_port": 12380,
+                          "jitter": 1,
+                          "remote_system_ip": "172.16.255.11",
+                          "vdevice_name": "172.16.255.14",
+                          "proto": "IPSEC",
+                          "vip_idx": 190,
+                          "dst_port": 12366,
+                          "name": "172.16.255.14:lte-172.16.255.11:3g",
+                          "sla_class_list": "0",
+                          "tunnel_color": "3g:lte",
+                          "host_name": "vm4",
+                          "id": "4OBG_HEB_JLsavezVUfr"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get stats raw data",
+        "operationId": "getPostStatDataRawData_25",
+        "requestBody": {
+          "description": "Stats query string",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Stats query string": {
+                  "description": "Stats query string",
+                  "value": {
+                    "query": {
+                      "condition": "AND",
+                      "rules": [
+                        {
+                          "value": [
+                            "2020-05-10T01:00:00 UTC",
+                            "2020-05-10T01:30:00 UTC"
+                          ],
+                          "field": "entry_time",
+                          "type": "date",
+                          "operator": "between"
+                        },
+                        {
+                          "value": [
+                            "172.16.255.15"
+                          ],
+                          "field": "local_system_ip",
+                          "type": "string",
+                          "operator": "in"
+                        },
+                        {
+                          "value": [
+                            "172.16.255.16"
+                          ],
+                          "field": "remote_system_ip",
+                          "type": "string",
+                          "operator": "in"
+                        }
+                      ]
+                    },
+                    "aggregation": {
+                      "field": [
+                        {
+                          "property": "name",
+                          "sequence": 1
+                        },
+                        {
+                          "property": "proto",
+                          "sequence": 2
+                        }
+                      ],
+                      "histogram": {
+                        "property": "entry_time",
+                        "type": "minute",
+                        "interval": 30,
+                        "order": "asc"
+                      },
+                      "metrics": [
+                        {
+                          "property": "latency",
+                          "type": "avg"
+                        },
+                        {
+                          "property": "loss",
+                          "type": "avg"
+                        },
+                        {
+                          "property": "loss_percentage",
+                          "type": "avg"
+                        },
+                        {
+                          "property": "vqoe_score",
+                          "type": "avg"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Search result": {
+                    "description": "Search result",
+                    "value": {
+                      "data": [
+                        {
+                          "remote_color": "lte",
+                          "fec_re": 0,
+                          "vqoe_score": 10,
+                          "device_model": "vedge-cloud",
+                          "latency": 1,
+                          "tx_octets": 0,
+                          "dst_ip": "10.0.106.1",
+                          "local_color": "lte",
+                          "src_ip": "10.1.15.15",
+                          "sla_class_names": "test_sla_class",
+                          "loss": 0,
+                          "total": 600,
+                          "tx_pkts": 0,
+                          "fec_tx": 0,
+                          "rx_octets": 0,
+                          "statcycletime": 1589075400052,
+                          "state": "Up",
+                          "local_system_ip": "172.16.255.15",
+                          "tenant": "default",
+                          "entry_time": 1589073783045,
+                          "loss_percentage": 0,
+                          "rx_pkts": 0,
+                          "vmanage_system_ip": "172.16.255.15",
+                          "fec_rx": 0,
+                          "src_port": 12366,
+                          "jitter": 1,
+                          "remote_system_ip": "172.16.255.16",
+                          "vdevice_name": "172.16.255.15",
+                          "proto": "IPSEC",
+                          "vip_idx": 351,
+                          "dst_port": 12386,
+                          "name": "172.16.255.15:lte-172.16.255.16:lte",
+                          "sla_class_list": "0,1",
+                          "tunnel_color": "lte:lte",
+                          "host_name": "vm5",
+                          "id": "IuBG_HEB_JLsavezVkiZ"
+                        }
+                      ],
+                      "pageInfo": {
+                        "startTime": "1589073783045",
+                        "endTime": "1589072535795",
+                        "count": 15
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/statistics/speedtest/aggregation": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage",
+        "operationId": "getAggregationData_25",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query filter",
+            "schema": {
+              "type": "string"
+            },
+            "example": {
+              "query": {
+                "field": "latency",
+                "type": "long",
+                "value": [
+                  "1"
+                ],
+                "operator": "greater"
+              },
+              "fields": [
+                "latency"
+              ],
+              "aggregation": {
+                "metrics": [
+                  {
+                    "property": "latency",
+                    "type": "avg"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Aggregated each result": {
+                    "description": "Aggregated each result",
+                    "value": {
+                      "data": [
+                        {
+                          "latency": 0.6404125644631974
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get aggregated data based on input query and filters. The data can be filtered on time and other unique parameters based upon necessity and intended usage",
+        "operationId": "getPostAggregationData_25",
+        "requestBody": {
+          "description": "Stats query string",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Stats query string": {
+                  "description": "Stats query string",
+                  "value": {
+                    "query": {
+                      "field": "latency",
+                      "type": "long",
+                      "value": [
+                        "1"
+                      ],
+                      "operator": "greater"
+                    },
+                    "fields": [
+                      "latency"
+                    ],
+                    "aggregation": {
+                      "metrics": [
+                        {
+                          "property": "latency",
+                          "type": "avg"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Aggregated search result": {
+                    "description": "Aggregated search result",
+                    "value": {
+                      "data": [
+                        {
+                          "latency": 0.6404125644631974
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/statistics/speedtest/csv": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get raw data with optional query as CSV",
+        "operationId": "getStatDataRawDataAsCSV_23",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query string",
+            "schema": {
+              "type": "string"
+            },
+            "example": {
+              "query": {
+                "field": "latency",
+                "type": "long",
+                "value": [
+                  "100"
+                ],
+                "operator": "greater"
+              },
+              "size": 1000,
+              "sort": [
+                {
+                  "field": "latency",
+                  "type": "long",
+                  "order": "asc"
+                }
+              ],
+              "fields": [
+                "latency"
+              ],
+              "aggregation": {
+                "metrics": [
+                  {
+                    "property": "latency",
+                    "type": "avg"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "Search result in csv format": {
+                    "description": "Search result in csv format",
+                    "value": "blob:https://<vmanageIP>/82c972bc-f9b3-4cce-bb70-1e1b033ef1cd"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/statistics/speedtest/doccount": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get response count of a query",
+        "operationId": "getCount_26",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": {
+              "query": {
+                "field": "latency",
+                "type": "long",
+                "value": [
+                  "1"
+                ],
+                "operator": "greater"
+              },
+              "fields": [
+                "latency"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Query result count": {
+                    "description": "Query result count",
+                    "value": {
+                      "count": 9642
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get response count of a query",
+        "operationId": "getCountPost_25",
+        "requestBody": {
+          "description": "Query",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Query": {
+                  "description": "Query",
+                  "value": {
+                    "query": {
+                      "field": "latency",
+                      "type": "long",
+                      "value": [
+                        "1"
+                      ],
+                      "operator": "greater"
+                    },
+                    "fields": [
+                      "latency"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Query result count": {
+                    "description": "Query result count",
+                    "value": {
+                      "count": 9642
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/statistics/speedtest/fields": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get fields and type",
+        "operationId": "getStatDataFields_26",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/statistics/speedtest/page": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get stats raw data",
+        "operationId": "getStatBulkRawData_25",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query string",
+            "schema": {
+              "type": "string"
+            },
+            "example": {
+              "query": {
+                "field": "latency",
+                "type": "long",
+                "value": [
+                  "100"
+                ],
+                "operator": "greater"
+              },
+              "size": 1,
+              "sort": [
+                {
+                  "field": "latency",
+                  "type": "long",
+                  "order": "asc"
+                }
+              ],
+              "fields": [
+                "latency"
+              ]
+            }
+          },
+          {
+            "name": "scrollId",
+            "in": "query",
+            "description": "ES scroll Id",
+            "schema": {
+              "type": "string"
+            },
+            "example": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAOIWZ1NQbXpvQ29Uc0stNzZ2UzlwTEREUQ=="
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "Result size",
+            "schema": {
+              "type": "string"
+            },
+            "example": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Search result": {
+                    "description": "Search result",
+                    "value": {
+                      "data": [
+                        {
+                          "latency": 0,
+                          "id": "iOAG_HEB_JLsavezPyuF"
+                        }
+                      ],
+                      "pageInfo": {
+                        "startTime": "",
+                        "endTime": "",
+                        "count": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get stats raw data",
+        "operationId": "getPostStatBulkRawData_25",
+        "parameters": [
+          {
+            "name": "scrollId",
+            "in": "query",
+            "description": "ES scroll Id",
+            "schema": {
+              "type": "string"
+            },
+            "example": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAOIWZ1NQbXpvQ29Uc0stNzZ2UzlwTEREUQ=="
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "Result size",
+            "schema": {
+              "type": "string"
+            },
+            "example": 10
+          }
+        ],
+        "requestBody": {
+          "description": "Stats query string",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {
+                "Stats query string": {
+                  "description": "Stats query string",
+                  "value": {
+                    "query": {
+                      "field": "latency",
+                      "type": "long",
+                      "value": [
+                        "100"
+                      ],
+                      "operator": "greater"
+                    },
+                    "size": 1,
+                    "sort": [
+                      {
+                        "field": "latency",
+                        "type": "long",
+                        "order": "asc"
+                      }
+                    ],
+                    "fields": [
+                      "latency"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Search result": {
+                    "description": "Search result",
+                    "value": {
+                      "data": [
+                        {
+                          "latency": 0,
+                          "id": "iOAG_HEB_JLsavezPyuF"
+                        }
+                      ],
+                      "pageInfo": {
+                        "startTime": "",
+                        "endTime": "",
+                        "count": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/statistics/speedtest/query/fields": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "description": "Get query fields",
+        "operationId": "getStatQueryFields_25",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Query result count": {
+                    "description": "Query result count",
+                    "value": {
+                      "data": [
+                        {
+                          "property": "entry_time",
+                          "name": "Event Time",
+                          "isRequired": true,
+                          "dataType": "date",
+                          "fieldData": {
+                            "type": "dateList"
+                          },
+                          "options": [
+                            {
+                              "key": "last_1_hour",
+                              "value": "Last 1 hour",
+                              "number": "1",
+                              "enableDateFields": false
+                            },
+                            {
+                              "key": "last_3_hours",
+                              "value": "Last 3 hours",
+                              "number": "3",
+                              "enableDateFields": false
+                            },
+                            {
+                              "key": "last_6_hours",
+                              "value": "Last 6 hours",
+                              "number": "6",
+                              "enableDateFields": false
+                            },
+                            {
+                              "key": "last_12_hours",
+                              "value": "Last 12 hours",
+                              "number": "12",
+                              "enableDateFields": false
+                            },
+                            {
+                              "key": "last_24_hours",
+                              "value": "Last 24 hours",
+                              "number": "24",
+                              "enableDateFields": false,
+                              "isSelected": true
+                            },
+                            {
+                              "key": "last_168_hours",
+                              "value": "Last 7 days",
+                              "number": "168",
+                              "enableDateFields": false
+                            },
+                            {
+                              "key": "custom",
+                              "value": "Custom",
+                              "enableDateFields": true
+                            }
+                          ]
+                        },
+                        {
+                          "property": "vdevice_name",
+                          "name": "Device name",
+                          "isRequired": true,
+                          "multiSelect": false,
+                          "dataType": "string"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stream/device/capture": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "gerSessionInfo_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/capture/disable/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "disableSession",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/capture/download/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "downloadFile_2",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/octet-stream": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/capture/forcedisbale/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "forceStopPcapSession",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/capture/start/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "startPcapSession",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/capture/status/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "getFileDownloadStatus",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/capture/stop/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "stopPcapSession",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/capture/{deviceUUID}/{sessionId}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "formPost_1",
+        "parameters": [
+          {
+            "name": "deviceUUID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "*/*": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/log": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "gerSessionInfo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/log/disable/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "disableDeviceLog",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/log/download/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "downloadDebugLog",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Session Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/octet-stream": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/log/renew/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "renewSessionInfo",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/log/search/{sessionId}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "searchDeviceLog",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Session Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/log/sessions": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "getSessions",
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/log/sessions/clear/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "clearSession",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Session Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/log/type": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "getLogType",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "description": "Device uuid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/log/{logType}/{deviceUUID}/{sessionId}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "streamLog",
+        "parameters": [
+          {
+            "name": "logType",
+            "in": "path",
+            "description": "Log type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deviceUUID",
+            "in": "path",
+            "description": "Device uuid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Session Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/log/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "getDeviceLog",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "logId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": -1
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/speed": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "getSession",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/speed/disable/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "disableSession_1",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/speed/interface/bandwidth": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "getInterfaceBandwidth",
+        "parameters": [
+          {
+            "name": "circuit",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deviceUUID",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/speed/start/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "startSpeedTest",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/speed/status/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "getSpeedTestStatus",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/speed/stop/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "stopSpeedTest",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/speed/{deviceUUID}/{sessionId}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "saveSpeedTestResults",
+        "parameters": [
+          {
+            "name": "deviceUUID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "*/*": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/speed/{sessionId}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "getSpeedTest",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "logId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/stream/device/status/{deviceUUID}": {
+      "post": {
+        "tags": [
+          "Troubleshooting Tools - Diagnostics"
+        ],
+        "operationId": "processDeviceStatus",
+        "parameters": [
+          {
+            "name": "deviceUUID",
+            "in": "path",
+            "description": "Device uuid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "*/*": {}
+            }
+          }
+        }
+      }
+    },
+    "/troubleshooting/control/{uuid}": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Troubleshoot control connections",
+        "operationId": "getControlConnections",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "Device uuid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Device control connection": {
+                    "description": "Device control connection",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/troubleshooting/devicebringup": {
+      "get": {
+        "tags": [
+          "Troubleshooting Tools - Device Connectivity"
+        ],
+        "description": "Debug device bring up",
+        "operationId": "getConfiguration_1",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "description": "Device uuid",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Device configuration": {
+                    "description": "Device configuration",
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
