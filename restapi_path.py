@@ -29,21 +29,21 @@ class OpenAPI:
 
 
 if __name__ == '__main__':
-    #myswag = OpenAPI('openapi/dnac/Release-1310-swagger.Build1220.annotated.json')
-    myswag = OpenAPI('openapi/meraki/v0.json')
-    myswag = OpenAPI('openapi/sd-wan/nms-administration.json')
-    # paths = myswag.get_paths()
-    # for path in paths:
-    #     print(path)
-    
-    while True:
-        keyword = input('Enter keyword: ')
-        if keyword == 'quit':
-            break
-        
-        paths = myswag.paths_with(keyword)
-        for path in paths:
-            print(path)
+    if len(sys.argv) > 1:
+        # Assume its a filename
+        filename = sys.argv[1]
+        myswag = OpenAPI(filename)
+
+        while True:
+            keyword = input('Enter keyword: ')
+            if keyword == 'quit':
+                break
+            
+            paths = myswag.paths_with(keyword)
+            for path in paths:
+                print(path)
+    else:
+        print('Usage: restapi_path.py path/filename')
 
         
 
