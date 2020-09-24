@@ -15,7 +15,7 @@ class OpenAPI:
         path_list = []
         if keyword != '':
             for path in self.paths['paths'].keys():
-                if keyword in path:
+                if keyword.lower() in path.lower():
                     path_list.append(path)
 
         return path_list
@@ -29,21 +29,35 @@ class OpenAPI:
 
 
 if __name__ == '__main__':
+    # TODO
+    # ========================
+    # {verb} keyword {index}
+    # {verb} path?
+    # {verb} path*
+
     if len(sys.argv) > 1:
         # Assume its a filename
         filename = sys.argv[1]
         myswag = OpenAPI(filename)
 
+        print('Rest API Path')
+        print('Enter a keyword when you are done enter "quit"')
+
         while True:
-            keyword = input('Enter keyword: ')
+            keyword = input() #input('Enter keyword: ')
             if keyword == 'quit':
                 break
             
+            if keyword == '':
+                continue
+
             paths = myswag.paths_with(keyword)
-            for path in paths:
-                print(path)
+
+            if len(paths) == 0:
+                print('No results')
+                print()
+
+            for (i,path) in enumerate(paths):
+                print(f'{i}: {path}')
     else:
         print('Usage: restapi_path.py path/filename')
-
-        
-
