@@ -27,6 +27,11 @@ class OpenAPI:
         
         return path_list
 
+    def get_title(self):
+        return self.paths['info']['title']
+
+    def get_version(self):
+        return self.paths['info']['version']
 
 if __name__ == '__main__':
     # TODO
@@ -39,9 +44,16 @@ if __name__ == '__main__':
         # Assume its a filename
         filename = sys.argv[1]
         myswag = OpenAPI(filename)
+        description = myswag.get_title()
+        version = myswag.get_version()
 
-        print('Rest API Path')
-        print('Enter a keyword when you are done enter "quit"')
+        print('='*79)
+        print('Rest API Path loaded OpenAPI specification:')
+        print(f'\t {description}')
+        print(f'\t {version}')
+        print()
+        print('Enter a keyword or "quit" to exit')
+        print('='*79)
 
         while True:
             keyword = input() #input('Enter keyword: ')
