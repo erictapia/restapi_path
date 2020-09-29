@@ -13,7 +13,7 @@ class OpenAPI:
 
     def paths_with(self, keyword, verb=None, index=None):
         path_list = []
-        #if keyword != '':
+
         for path in self.paths['paths'].keys():
             if keyword.lower() in path.lower():
                 if verb != None:
@@ -60,7 +60,7 @@ if __name__ == '__main__':
         print('Rest API Path loaded OpenAPI specification:')
         print(f'\t Title: {title}')
         print(f'\t Version: {version}')
-        print(f'\t Base URL: {myswag.get_host()}{myswag.get_base_path()}')
+        #print(f'\t Base URL: {myswag.get_host()}{myswag.get_base_path()}')
         print()
         print('Enter a keyword using format shown below or "quit" to exit')
         print('\t keyword')
