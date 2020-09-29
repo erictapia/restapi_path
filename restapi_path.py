@@ -16,7 +16,12 @@ class OpenAPI:
         #if keyword != '':
         for path in self.paths['paths'].keys():
             if keyword.lower() in path.lower():
-                path_list.append(path)
+                if verb != None:
+                    if verb in self.paths['paths'][path].keys():
+                        path_list.append(path)
+                
+                else:
+                    path_list.append(path)
 
         if index != None:
             path_list = [path_list[index]]
@@ -43,11 +48,6 @@ class OpenAPI:
         return self.paths['host']
 
 if __name__ == '__main__':
-    # TODO
-    # ========================
-    # {verb} keyword {index}
-    # {verb} path?
-    # {verb} path*
 
     if len(sys.argv) > 1:
         # Assume its a filename
