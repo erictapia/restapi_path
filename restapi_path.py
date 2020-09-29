@@ -32,6 +32,12 @@ class OpenAPI:
 
     def get_version(self):
         return self.paths['info']['version']
+    
+    def get_base_path(self):
+        return self.paths['basePath']
+    
+    def get_host(self):
+        return self.paths['host']
 
 if __name__ == '__main__':
     # TODO
@@ -44,13 +50,14 @@ if __name__ == '__main__':
         # Assume its a filename
         filename = sys.argv[1]
         myswag = OpenAPI(filename)
-        description = myswag.get_title()
+        title = myswag.get_title()
         version = myswag.get_version()
 
         print('='*79)
         print('Rest API Path loaded OpenAPI specification:')
-        print(f'\t {description}')
-        print(f'\t {version}')
+        print(f'\t Title: {title}')
+        print(f'\t Version: {version}')
+        print(f'\t Base URL: {myswag.get_host()}{myswag.get_base_path()}')
         print()
         print('Enter a keyword or "quit" to exit')
         print('='*79)
