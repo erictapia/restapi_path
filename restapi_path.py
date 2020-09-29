@@ -11,12 +11,15 @@ class OpenAPI:
         with open(self.fp, 'r') as file:
             self.paths = json.load(file)
 
-    def paths_with(self, keyword):
+    def paths_with(self, keyword, verb=None, index=None):
         path_list = []
-        if keyword != '':
-            for path in self.paths['paths'].keys():
-                if keyword.lower() in path.lower():
-                    path_list.append(path)
+        #if keyword != '':
+        for path in self.paths['paths'].keys():
+            if keyword.lower() in path.lower():
+                path_list.append(path)
+
+        if index != None:
+            path_list = [path_list[index]]
 
         return path_list
 
@@ -59,7 +62,14 @@ if __name__ == '__main__':
         print(f'\t Version: {version}')
         print(f'\t Base URL: {myswag.get_host()}{myswag.get_base_path()}')
         print()
-        print('Enter a keyword or "quit" to exit')
+        print('Enter a keyword using format shown below or "quit" to exit')
+        print('\t keyword')
+        print('\t verb keyword')
+        print('\t verb keyword index')
+        print()
+        print('Keyword: any word that could be part of the REST API URL path')
+        print('Verb: any HTTP request verb')
+        print('Index: The index to get more information about one path from the result set.')
         print('='*79)
 
         while True:
@@ -69,14 +79,36 @@ if __name__ == '__main__':
             
             if keyword == '':
                 continue
+            
+            # Hack: Remove leading, trailing, and consecutive spaces
+            #       Then split
+            words = " ".join(keyword.split()).split()
+            
+            word_count = len(words)
+            if word_count == 3:
+                verb = words[0]
+                keyword = words[1]
+                index = int(words[2])
+                paths = myswag.paths_with(keyword, verb, index)
 
-            paths = myswag.paths_with(keyword)
+            elif word_count == 2:
+                verb = words[0]
+                keyword = words[1]
+                paths = myswag.paths_with(keyword, verb)
+
+            else:
+                paths = myswag.paths_with(keyword)
 
             if len(paths) == 0:
                 print('No results')
-                print()
+                
+            elif len(paths) == 1:
+                print(f'{paths[0]}')
+            
+            else:
+                for (i,path) in enumerate(paths):
+                    print(f'{i}: {path}')
 
-            for (i,path) in enumerate(paths):
-                print(f'{i}: {path}')
+            print()
     else:
         print('Usage: restapi_path.py path/filename')
