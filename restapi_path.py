@@ -16,15 +16,19 @@ class OpenAPI:
 
         for path in self.paths['paths'].keys():
             if keyword.lower() in path.lower():
-                if verb != None:
+                if verb != None and index != None:
                     if verb in self.paths['paths'][path].keys():
-                        path_list.append(path)
-                
+                        path_list.append(f"{path} \n\t- {self.paths['paths'][path][verb]['description']}\n")
+                elif verb != None:
+                    if verb in self.paths['paths'][path].keys():
+                        path_list.append(f"{path} \n\t- {self.paths['paths'][path][verb]['description']}\n")
                 else:
                     path_list.append(path)
-
-        if index != None:
-            path_list = [path_list[index]]
+        try:
+          if index != None:
+              path_list = [path_list[index]]
+        except:
+          path_list = ['Index out of range']
 
         return path_list
 
